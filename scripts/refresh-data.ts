@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
-import { PriceTracker } from "@/lib/price-tracker";
+import { prisma } from "../lib/prisma";
+import { PriceTracker } from "../lib/price-tracker";
 
 async function refreshData() {
     console.log("Clearing existing price records...");

@@ -1,7 +1,7 @@
 import cron from "node-cron";
-import { PriceTracker } from "./src/lib/price-tracker";
-import { EmailService } from "./src/lib/email-service";
-import { prisma } from "./src/lib/prisma";
+import { PriceTracker } from "./lib/price-tracker";
+import { EmailService } from "./lib/email-service";
+import { prisma } from "./lib/prisma";
 
 console.log("Scheduler started...");
 
