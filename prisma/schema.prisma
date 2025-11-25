@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  alerts    PriceAlert[]
+}
+
+model FlightRoute {
+  id          String        @id @default(cuid())
+  origin      String
+  destination String
+  records     PriceRecord[]
+  alerts      PriceAlert[]
+
+  @@unique([origin, destination])
+}
+
+model PriceRecord {
+  id           String      @id @default(cuid())
+  routeId      String
+  route        FlightRoute @relation(fields: [routeId], references: [id])
+  priceTRY     Float
+  priceEUR     Float
+  airline      String
+  flightNumber String
+  departureTime String   @default("00:00")
+  duration     Int       @default(180) // in minutes
+  recordedAt   DateTime    @default(now())
+  flightDate   DateTime
+}
+
+model PriceAlert {
+  id        String      @id @default(cuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+  routeId   String
+  route     FlightRoute @relation(fields: [routeId], references: [id])
+  targetDate DateTime
+  createdAt DateTime    @default(now())
+
+  @@index([userId])
+  @@index([routeId])
+}
