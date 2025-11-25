@@ -1,17 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    trailingSlash: true,
+    // Standalone output is often recommended for Vercel to reduce cold starts and size
+    output: 'standalone',
     eslint: {
+        // Warning: This allows production builds to complete even if there are lint errors.
         ignoreDuringBuilds: true,
-    },
-    async redirects() {
-        return [
-            {
-                source: '/google',
-                destination: 'https://google.com',
-                permanent: false,
-            },
-        ]
     },
 };
 
