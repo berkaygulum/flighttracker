@@ -24,6 +24,7 @@ export async function register(prevState: any, formData: FormData) {
             data: { email, password: hashedPassword },
         });
     } catch (error) {
+        console.error("Registration Error:", error);
         return { error: "Registration failed" };
     }
 
